@@ -59,8 +59,8 @@ public class TestEndpointImpl implements TestEndpoint {
             emailNotification.setTemplateProcessorType("freemarker");
             emailNotification.setChannelType("smtp");
             emailNotification.setFrom(entityManager.createQuery("SELECT e FROM FromEmail e", FromEmail.class).setMaxResults(1).getSingleResult());
-            emailNotification.setSubject("Hello");
-            emailNotification.setBodyText("Hey my friend!");
+            emailNotification.setSubjectTemplateName("Hello");
+            emailNotification.setBodyTextTemplateName("Hey my friend!");
             emailNotification.setScheduleTime(Instant.now());
             jobContext.getJobManager().addJobInstance(emailNotification);
         } else {
