@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,11 +47,11 @@ public class FreemarkerTemplateProcessor implements TemplateProcessor<String>, S
     /**
      * The configuration property for the Freemarker {@link Configuration} object.
      */
-    public static final String FREEMARKER_CONFIGURATION_PROPERTY = "configuration";
+    public static final String FREEMARKER_CONFIGURATION_PROPERTY = "freemarker.configuration";
     /**
      * The configuration property for the Freemarker template encoding.
      */
-    public static final String FREEMARKER_ENCODING_PROPERTY = "encoding";
+    public static final String FREEMARKER_ENCODING_PROPERTY = "freemarker.encoding";
     /**
      * The configuration property for the Freemarker {@link Template}.
      */
@@ -60,11 +60,11 @@ public class FreemarkerTemplateProcessor implements TemplateProcessor<String>, S
     /**
      * The configuration property for the {@link ResourceBundle}.
      */
-    public static final String RESOURCE_BUNDLE_KEY = "resourceBundle";
+    public static final String RESOURCE_BUNDLE_MODEL_KEY = "resourceBundle";
     /**
      * The configuration property for the {@link Locale}.
      */
-    public static final String LOCALE_KEY = "locale";
+    public static final String LOCALE_MODEL_KEY = "locale";
 
     private final FreemarkerTemplateLookup freemarkerTemplateLookup;
 
@@ -73,12 +73,13 @@ public class FreemarkerTemplateProcessor implements TemplateProcessor<String>, S
     /**
      * Creates a new Freemarker template processor from the given configuration source.
      *
+     * @param templateName The template name
      * @param configurationSource The configuration source
      */
-    public FreemarkerTemplateProcessor(ConfigurationSource configurationSource) {
+    public FreemarkerTemplateProcessor(String templateName, ConfigurationSource configurationSource) {
         Function<String, FreemarkerTemplateLookup> templateAccessor = name -> (Locale locale) -> {
             Configuration configuration = configurationSource.getPropertyOrDefault(FREEMARKER_CONFIGURATION_PROPERTY, Configuration.class, null, o -> {
-                Configuration c = new Configuration();
+                Configuration c = new Configuration(Configuration.VERSION_2_3_28);
                 c.setClassLoaderForTemplateLoading(getClass().getClassLoader(), "");
                 return c;
             });
@@ -89,9 +90,9 @@ public class FreemarkerTemplateProcessor implements TemplateProcessor<String>, S
                 throw new TemplateException("", e);
             }
         };
-        this.freemarkerTemplateLookup = configurationSource.getPropertyOrFail(FREEMARKER_TEMPLATE_PROPERTY, FreemarkerTemplateLookup.class, templateAccessor);
+        this.freemarkerTemplateLookup = configurationSource.getPropertyOrDefault(FREEMARKER_TEMPLATE_PROPERTY, FreemarkerTemplateLookup.class, templateAccessor, o -> templateAccessor.apply(templateName));
         Function<String, TemplateResourceBundleLookup> resourceBundleAccessor = name -> (Locale locale) -> ResourceBundle.getBundle(name, locale);
-        this.resourceBundleLookup = configurationSource.getPropertyOrDefault(RESOURCE_BUNDLE_KEY, TemplateResourceBundleLookup.class, resourceBundleAccessor, o -> locale -> null);
+        this.resourceBundleLookup = configurationSource.getPropertyOrDefault(RESOURCE_BUNDLE_MODEL_KEY, TemplateResourceBundleLookup.class, resourceBundleAccessor, o -> locale -> null);
     }
 
     /**
@@ -118,10 +119,10 @@ public class FreemarkerTemplateProcessor implements TemplateProcessor<String>, S
 
     @Override
     public String processTemplate(Map<String, Object> model) {
-        Locale locale = (Locale) model.get(LOCALE_KEY);
+        Locale locale = (Locale) model.get(LOCALE_MODEL_KEY);
         ResourceBundle resourceBundle = resourceBundleLookup.findResourceBundle(locale);
         if (resourceBundle == null) {
-            resourceBundle = (ResourceBundle) model.get(RESOURCE_BUNDLE_KEY);
+            resourceBundle = (ResourceBundle) model.get(RESOURCE_BUNDLE_MODEL_KEY);
         }
         if (resourceBundle != null) {
             model = new HashMap<>(model);

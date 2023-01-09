@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.blazebit.notify.email.message;
 import com.blazebit.notify.NotificationRecipient;
 
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * A base type for a E-Mail notification recipient.
@@ -40,11 +41,12 @@ public interface EmailNotificationRecipient<ID> extends NotificationRecipient<ID
      *
      * @param id     The notification recipient identifier
      * @param locale The notification recipient locale
+     * @param timeZone The notification recipient time zone
      * @param email  The notification recipient E-Mail address
      * @param <X>    The notification recipient identifier type
      * @return a simple notification recipient
      */
-    static <X> EmailNotificationRecipient<X> of(X id, Locale locale, String email) {
+    static <X> EmailNotificationRecipient<X> of(X id, Locale locale, TimeZone timeZone, String email) {
         return new EmailNotificationRecipient<X>() {
             @Override
             public X getId() {
@@ -54,6 +56,11 @@ public interface EmailNotificationRecipient<ID> extends NotificationRecipient<ID
             @Override
             public Locale getLocale() {
                 return locale;
+            }
+
+            @Override
+            public TimeZone getTimeZone() {
+                return timeZone;
             }
 
             @Override

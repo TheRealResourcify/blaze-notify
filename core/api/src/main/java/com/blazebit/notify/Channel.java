@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,8 @@ package com.blazebit.notify;
  * @since 1.0.0
  */
 public interface Channel<R extends NotificationRecipient<?>, M extends NotificationMessage> extends AutoCloseable {
+
+    String SERVICE_PROVIDER_PROPERTY = "serviceProvider";
 
     /**
      * Returns the notification message type class.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@
 package com.blazebit.notify.server.model;
 
 import com.blazebit.notify.jpa.model.base.AbstractNotificationJobTrigger;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 /**
@@ -34,5 +36,12 @@ public class EmailNotificationJobTrigger extends AbstractNotificationJobTrigger<
 
     public EmailNotificationJobTrigger(Long id) {
         super(id);
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idGenerator")
+    @Override
+    public Long getId() {
+        return id();
     }
 }

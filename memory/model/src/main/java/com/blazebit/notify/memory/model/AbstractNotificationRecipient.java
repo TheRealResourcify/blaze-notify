@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.blazebit.job.memory.model.BaseEntity;
 import com.blazebit.notify.NotificationRecipient;
 
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * An abstract base class implementing the {@link NotificationRecipient} interface.
@@ -27,9 +28,10 @@ import java.util.Locale;
  * @author Christian Beikov
  * @since 1.0.0
  */
-public class AbstractNotificationRecipient extends BaseEntity<Long> implements NotificationRecipient<Long> {
+public abstract class AbstractNotificationRecipient extends BaseEntity<Long> implements NotificationRecipient<Long> {
 
     private Locale locale;
+    private TimeZone timeZone;
 
     /**
      * Creates an empty notification recipient.
@@ -58,5 +60,14 @@ public class AbstractNotificationRecipient extends BaseEntity<Long> implements N
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
+    }
+
+    @Override
+    public TimeZone getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
     }
 }

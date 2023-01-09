@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,11 @@ import com.blazebit.domain.declarative.DiscoverMode;
 import com.blazebit.domain.declarative.DomainAttribute;
 import com.blazebit.domain.declarative.DomainType;
 import com.blazebit.notify.jpa.model.base.AbstractNotificationRecipient;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -46,9 +48,11 @@ public class EmailNotificationRecipient extends AbstractNotificationRecipient im
     }
 
     @Override
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "idGenerator")
     @DomainAttribute(Integer.class)
     public Long getId() {
-        return super.getId();
+        return id();
     }
 
     @Override

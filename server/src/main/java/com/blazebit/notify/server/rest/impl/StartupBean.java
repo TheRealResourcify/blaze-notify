@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,7 @@
 package com.blazebit.notify.server.rest.impl;
 
 import com.blazebit.notify.NotificationJobContext;
-import com.blazebit.notify.email.model.jpa.FromEmail;
-
+import com.blazebit.notify.server.model.FromEmail;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;

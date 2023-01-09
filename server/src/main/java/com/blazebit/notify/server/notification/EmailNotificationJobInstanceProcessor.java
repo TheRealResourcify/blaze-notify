@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,13 +20,12 @@ import com.blazebit.job.JobInstanceProcessingContext;
 import com.blazebit.job.JobInstanceState;
 import com.blazebit.job.Schedule;
 import com.blazebit.notify.email.model.jpa.EmailNotificationReviewState;
-import com.blazebit.notify.email.model.jpa.FromEmail;
 import com.blazebit.notify.processor.hibernate.insertselect.AbstractInsertSelectNotificationJobInstanceProcessor;
 import com.blazebit.notify.server.model.EmailNotificationJobInstance;
 import com.blazebit.notify.server.model.EmailNotificationRecipient;
+import com.blazebit.notify.server.model.FromEmail;
 import com.blazebit.notify.server.model.JobBasedEmailNotification;
 import com.blazebit.persistence.InsertCriteriaBuilder;
-
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;

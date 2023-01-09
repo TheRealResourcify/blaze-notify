@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 - 2022 Blazebit.
+ * Copyright 2018 - 2023 Blazebit.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 package com.blazebit.notify;
 
 import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * A base type for a notification recipient.
@@ -41,14 +42,22 @@ public interface NotificationRecipient<ID> {
     Locale getLocale();
 
     /**
+     * Returns the time zone for this notification recipient.
+     *
+     * @return the time zone for this notification recipient
+     */
+    TimeZone getTimeZone();
+
+    /**
      * Returns a simple notification recipient with the given identifier and locale.
      *
      * @param id The notification recipient identifier
      * @param locale The notification recipient locale
+     * @param timeZone The notification recipient time zone
      * @param <X> The notification recipient identifier type
      * @return a simple notification recipient
      */
-    static <X> NotificationRecipient<X> of(X id, Locale locale) {
+    static <X> NotificationRecipient<X> of(X id, Locale locale, TimeZone timeZone) {
         return new NotificationRecipient<X>() {
             @Override
             public X getId() {
@@ -58,6 +67,11 @@ public interface NotificationRecipient<ID> {
             @Override
             public Locale getLocale() {
                 return locale;
+            }
+
+            @Override
+            public TimeZone getTimeZone() {
+                return timeZone;
             }
         };
     }
