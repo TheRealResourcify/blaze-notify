@@ -19,7 +19,7 @@
 
         <version.blaze-utils>0.1.19</version.blaze-utils>
         <version.blaze-persistence>1.4.0</version.blaze-persistence>
-        <version.blaze-job>1.0.1-Resourcify3</version.blaze-job>
+        <version.blaze-job>1.0.1-Resourcify4</version.blaze-job>
         <version.blaze-actor>1.0.0-Alpha5</version.blaze-actor>
         <version.blaze-expression>1.0.0-Alpha5</version.blaze-expression>
         <version.blaze-domain>1.0.0-Alpha3</version.blaze-domain>
