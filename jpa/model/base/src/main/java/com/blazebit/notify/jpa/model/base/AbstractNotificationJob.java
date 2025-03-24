@@ -19,7 +19,9 @@ package com.blazebit.notify.jpa.model.base;
 import com.blazebit.job.jpa.model.AbstractJob;
 import com.blazebit.notify.NotificationJob;
 
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.MappedSuperclass;
 
 /**
  * An abstract mapped superclass implementing the {@link NotificationJob} interface.
@@ -27,6 +29,7 @@ import javax.persistence.MappedSuperclass;
  * @author Christian Beikov
  * @since 1.0.0
  */
+@Access(AccessType.PROPERTY)
 @MappedSuperclass
 public abstract class AbstractNotificationJob extends AbstractJob implements NotificationJob {
 

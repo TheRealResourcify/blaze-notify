@@ -23,16 +23,18 @@ import com.blazebit.notify.NotificationJobContext;
 import com.blazebit.notify.email.message.Attachment;
 import com.blazebit.notify.jpa.model.base.AbstractNotification;
 import com.blazebit.notify.template.api.TemplateProcessor;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Lob;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Lob;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * An abstract mapped superclass implementing the {@link Notification} interface for E-Mail notifications.
@@ -41,6 +43,7 @@ import javax.validation.constraints.NotNull;
  * @author Christian Beikov
  * @since 1.0.0
  */
+@Access(AccessType.PROPERTY)
 @MappedSuperclass
 public abstract class AbstractEmailNotification<ID> extends AbstractNotification<ID> implements ConfigurationSourceProvider {
 

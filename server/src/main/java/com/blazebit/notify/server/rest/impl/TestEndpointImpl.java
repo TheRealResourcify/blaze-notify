@@ -26,10 +26,10 @@ import com.blazebit.notify.server.model.FromEmail;
 import com.blazebit.notify.server.rest.api.TestEndpoint;
 import java.time.Instant;
 import java.util.Locale;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.ws.rs.core.Response;
+import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
+import jakarta.persistence.EntityManager;
+import jakarta.ws.rs.core.Response;
 
 /**
  * @author Christian Beikov
@@ -57,8 +57,8 @@ public class TestEndpointImpl implements TestEndpoint {
             emailNotification.setTo(recipient.getEmail());
             emailNotification.setChannelType("smtp");
             emailNotification.setFrom(entityManager.createQuery("SELECT e FROM FromEmail e", FromEmail.class).setMaxResults(1).getSingleResult());
-            emailNotification.setSubjectTemplateName("Hello");
-            emailNotification.setBodyTextTemplateName("Hey my friend!");
+            emailNotification.setSubject("Hello");
+            emailNotification.setBodyText("Hey my friend!");
             emailNotification.setScheduleTime(Instant.now());
             jobContext.getJobManager().addJobInstance(emailNotification);
         } else {

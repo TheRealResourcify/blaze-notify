@@ -15,9 +15,11 @@
  */
 package com.blazebit.notify.email.model.jpa;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * An entity for the from address.
@@ -25,6 +27,7 @@ import javax.validation.constraints.NotNull;
  * @author Christian Beikov
  * @since 1.0.0
  */
+@Access(AccessType.PROPERTY)
 @MappedSuperclass
 public abstract class AbstractFromEmail extends BaseEntity<Long> {
 
